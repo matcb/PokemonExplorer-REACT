@@ -1,13 +1,15 @@
 import React, {useReducer, createContext, useEffect} from 'react'
 import {loadFavorites, saveFavorites}from '../utils/storage.js'
 
+/*Estado Inicial*/ 
 const initialState = {
     favorites:loadFavorites(),
     types:['fire', 'water', 'grass', 'electric', 'ice', 'fighting', 'poison', 'ground', 'flying', 'psychic', 'bug', 'rock', 'ghost', 
         'dragon', 'dark', 'steel', 'fairy']
 }
 
-const reducer = (state, action) => {
+/*Reducer - Atualiza o estado*/ 
+const reducer = (state, action) => { // state = estado atual / action = obj que faz algo com o dado
     switch(action.type){
         
         case 'ADD_FAVORITE':
@@ -29,7 +31,7 @@ const reducer = (state, action) => {
 const PokemonContext = createContext()
 
 export const PokemonProvider = ({children}) => {
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const [state, dispatch] = useReducer(reducer, initialState) // dispatch mensageiro que envia acao para o reducer
 
     return(
         <PokemonContext.Provider value={{...state, dispatch}}>
